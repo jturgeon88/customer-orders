@@ -18,9 +18,15 @@ export class OrdersComponent implements OnInit {
   private route: ActivatedRoute) { }
 
   ngOnInit() {
-
+    // + sign converts to a number
+    let id = +this.route.snapshot.paramMap.get('id');
+    this.dataService.getOrders(id).subscribe((orders: IOrder[]) => {
+      //update the orders array with the fetched orders
+      this.orders = orders;
+    });
 
     this.dataService.getCustomer(id).subscribe((customer: ICustomer) => {
+      //update the customer with the fetched customer
       this.customer = customer;
     });
   }
